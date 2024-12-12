@@ -14,3 +14,7 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'farmacia.settings')
 
 application = get_wsgi_application()
+
+import os
+if os.getenv('CREATE_SUPERUSER', 'false').lower() == 'true':
+    from medicamentos.create_superuser import *
