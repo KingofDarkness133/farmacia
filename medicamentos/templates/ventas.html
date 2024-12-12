@@ -1,0 +1,179 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Venta de Medicamentos</title>
+    
+    <!-- Vincular archivo CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    
+    <!-- Agregar archivo JS -->
+    <script src="{% static 'js/scripts.js' %}" defer></script>
+    
+    <style>
+        /* Agregar estilos básicos dentro de <style> para pruebas rápidas */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header nav {
+            margin-top: 10px;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        h2 {
+            margin-top: 20px;
+            color: #2c3e50;
+        }
+
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input[type="number"], select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: #27ae60;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #2ecc71;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        h3 {
+            color: #27ae60;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+<body>
+    <header>
+        <h1>Registrar Venta de Medicamentos</h1>
+        <nav>
+            <a href="/">Inicio</a>
+            <a href="/medicamentos/">Medicamentos</a>
+            <a href="/ventas/">Ventas</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Registrar Venta</h2>
+            <form action="{% url 'ventas' %}" method="POST">
+                {% csrf_token %}
+                <label for="medicamento">Medicamento:</label>
+                <select name="medicamento" id="medicamento" required>
+                    {% for medicamento in medicamentos %}
+                    <option value="{{ medicamento.id }}">{{ medicamento.nombre }} - ${{ medicamento.precio }}</option>
+                    {% endfor %}
+                </select><br><br>
+
+                <label for="cantidad_vendida">Cantidad Vendida:</label>
+                <input type="number" id="cantidad_vendida" name="cantidad_vendida" min="1" value="1" required><br><br>
+
+                <button type="submit">Registrar Venta</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>Historial de Ventas</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID Venta</th>
+                        <th>Medicamento</th>
+                        <th>Cantidad Vendida</th>
+                        <th>Precio Unitario</th>
+                        <th>Total Venta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for venta in ventas %}
+                    <tr>
+                        <td>{{ venta.id }}</td>
+                        <td>{{ venta.medicamento.nombre }}</td>
+                        <td>{{ venta.cantidad_vendida }}</td>
+                        <td>${{ venta.medicamento.precio }}</td>
+                        <td>${{ venta.total_venta }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <h3>Total Dinero Ganado: ${{ total_dinero }}</h3>
+        </section>
+    </main>
+
+    <!-- Si el JS es necesario aquí, puedes agregar alguna funcionalidad adicional -->
+    <script>
+        // Código JavaScript para alguna funcionalidad adicional (si es necesario)
+        document.getElementById("cantidad_vendida").addEventListener("input", function() {
+            console.log("Cantidad Vendida cambiada a: ", this.value);
+        });
+    </script>
+</body>
+</html>

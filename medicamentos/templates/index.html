@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmacia XYZ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Farmacia XYZ</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#sobre-nosotros">Sobre Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#productos">Productos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/comprar/">Comprar</a></li>
+                    <a href="{% url 'login' %}" class="nav-link">Login</a>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Carrusel -->
+    <div id="carouselExample" class="carousel slide mt-5" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://via.placeholder.com/1200x400?text=Medicamentos+de+Calidad" class="d-block w-100" alt="Medicamentos de Calidad">
+            </div>
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Compra tus medicamentos fácilmente</h5>
+                <a href="/comprar/" class="btn btn-success">Comprar Ahora</a>
+            </div>
+            <div class="carousel-item">
+                <img src="https://via.placeholder.com/1200x400?text=Asesoramiento+Profesional" class="d-block w-100" alt="Asesoramiento Profesional">
+            </div>
+            <div class="carousel-item">
+                <img src="https://via.placeholder.com/1200x400?text=Precios+Competitivos" class="d-block w-100" alt="Precios Competitivos">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+        </button>
+    </div>
+
+    <!-- Sección Sobre Nosotros -->
+    <section id="sobre-nosotros" class="py-5">
+        <div class="container">
+            <h2 class="text-center">Sobre Nosotros</h2>
+            <p class="mt-4">Farmacia XYZ ha estado al servicio de nuestra comunidad desde 1990, ofreciendo medicamentos de calidad, precios competitivos y un equipo profesional dispuesto a ayudarle.</p>
+            <h3>Nuestra Historia</h3>
+            <p>Con más de 30 años de experiencia, somos líderes en la industria farmacéutica local.</p>
+            <h3>Misión</h3>
+            <p>Proveer productos y servicios farmacéuticos de alta calidad para mejorar la salud de nuestros clientes.</p>
+            <h3>Visión</h3>
+            <p>Ser reconocidos como la farmacia de confianza en la región.</p>
+        </div>
+    </section>
+
+    <!-- Sección Productos -->
+    <section id="productos" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center">Productos</h2>
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <a href="/comprar/" class="btn btn-primary btn-lg">Comprar Medicamentos</a>
+                    <img src="https://via.placeholder.com/300x200?text=Medicamentos" class="img-fluid" alt="Medicamentos">
+                    <h4 class="text-center mt-2">Medicamentos</h4>
+                </div>
+                <div class="col-md-4">
+                    <img src="https://via.placeholder.com/300x200?text=Vitaminas" class="img-fluid" alt="Vitaminas">
+                    <h4 class="text-center mt-2">Vitaminas</h4>
+                </div>
+                <div class="col-md-4">
+                    <img src="https://via.placeholder.com/300x200?text=Cuidado+Personal" class="img-fluid" alt="Cuidado Personal">
+                    <h4 class="text-center mt-2">Cuidado Personal</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Contacto -->
+    <section id="contacto" class="py-5">
+        <div class="container">
+            <h2 class="text-center">Contacto</h2>
+            <form class="mt-4">
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" placeholder="Ingrese su nombre">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Ingrese su email">
+                </div>
+                <div class="mb-3">
+                    <label for="mensaje" class="form-label">Mensaje</label>
+                    <textarea class="form-control" id="mensaje" rows="4" placeholder="Escriba su mensaje"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Scripts de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

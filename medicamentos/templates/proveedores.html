@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Proveedores</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Estilos adicionales para la tabla y el diseño */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .table th, .table td {
+            text-align: center;
+        }
+
+        .table th {
+            background-color: #f39c12;
+            color: white;
+        }
+
+        .btn {
+            margin: 5px;
+        }
+
+        .text-center {
+            margin-top: 20px;
+        }
+
+        .alert {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Lista de Proveedores</h1>
+
+        <!-- Tabla de proveedores -->
+        <table class="table table-bordered mt-4">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Contacto</th>
+                    <th>Dirección</th>
+                    <th>Producto que proveerá</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for proveedor in proveedores %}
+                <tr>
+                    <td>{{ proveedor.nombre }}</td>
+                    <td>{{ proveedor.contacto }}</td>
+                    <td>{{ proveedor.direccion }}</td> <!-- Columna de Dirección -->
+                    <td>{{ proveedor.producto }}</td>  <!-- Columna de Producto que proveerá -->
+                    <td>
+                        <a href="{% url 'editar_proveedor' proveedor.nombre %}" class="btn btn-warning btn-sm">Editar</a>
+                        <!-- El enlace de eliminación usa el nombre del proveedor -->
+                        <a href="{% url 'eliminar_proveedor' proveedor.nombre %}" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este proveedor?')">Eliminar</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center">No hay proveedores disponibles.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Botón para agregar un nuevo proveedor -->
+        <div class="text-center mt-4">
+            <a href="{% url 'agregar_proveedor' %}" class="btn btn-success">Agregar Nuevo Proveedor</a>
+        </div>
+
+        <!-- Botón para regresar al panel de administración -->
+        <div class="text-center mt-4">
+            <a href="{% url 'admin_home' %}" class="btn btn-primary">Volver al Panel de Administración</a>
+        </div>
+    </div>
+
+    <!-- Agregar el archivo JS de Bootstrap y un script adicional -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script>
+        // Opcional: Si deseas un mensaje de confirmación para eliminar proveedores
+        document.querySelectorAll('.btn-danger').forEach(function(button) {
+            button.addEventListener('click', function(event) {
+                if (!confirm('¿Estás seguro de que deseas eliminar este proveedor?')) {
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

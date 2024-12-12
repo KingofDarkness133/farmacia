@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Medicamento</title>
+
+    <!-- Estilos CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        header nav a {
+            margin: 0 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        form label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        form input, form textarea, form button {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        form button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+
+        .delete-button {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .delete-button:hover {
+            background-color: #b02a37;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Modificar Medicamento</h1>
+        <nav>
+            <a href="{% url 'admin_home' %}">Inicio</a>
+            <a href="{% url 'logout' %}">Cerrar Sesión</a>
+        </nav>
+    </header>
+
+    <div class="form-container">
+        <h2>{% if medicamento %}Editar Medicamento: {{ medicamento.nombre }}{% else %}Agregar Nuevo Medicamento{% endif %}</h2>
+    
+        <!-- Formulario para editar o agregar un medicamento -->
+        <form method="post">
+            {% csrf_token %}
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" value="{{ medicamento.nombre|default:'' }}" required>
+    
+            <label for="descripcion">Descripción</label>
+            <textarea id="descripcion" name="descripcion" rows="3" required>{{ medicamento.descripcion|default:'' }}</textarea>
+    
+            <label for="stock">Cantidad</label>
+            <input type="number" id="stock" name="stock" value="{{ medicamento.cantidad|default:'' }}" required>
+    
+            <label for="precio">Precio</label>
+            <input type="number" id="precio" name="precio" step="0.01" value="{{ medicamento.precio|default:'' }}" required>
+    
+            <button type="submit">Guardar Cambios</button>
+        </form>
+    
+        <!-- Botón para eliminar el medicamento -->
+        <form method="post" action="{% url 'eliminar_medicamento' %}" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este medicamento?');">
+            {% csrf_token %}
+            <input type="hidden" name="nombre" value="{{ medicamento.nombre|default:'' }}">
+            <button type="submit" class="delete-button">Eliminar Medicamento</button>
+        </form>
+    </div>
+    
+
+    <footer>
+        <p>&copy; 2024 Farmacia</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("Página de modificación cargada.");
+        });
+    </script>
+</body>
+</html>

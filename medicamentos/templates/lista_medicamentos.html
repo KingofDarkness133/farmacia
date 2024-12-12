@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Medicamentos</title>
+
+    <!-- CSS dentro del HTML -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        header nav a {
+            margin: 0 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+        table {
+            width: 80%;
+            margin: 2rem auto;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        table th {
+            background-color: #333;
+            color: white;
+        }
+
+        .btn {
+            padding: 5px 10px;
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+            display: inline-block;
+        }
+
+        .btn-edit {
+            background-color: #007bff;
+        }
+
+        .btn-edit:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lista de Medicamentos</h1>
+        <nav>
+            <a href="{% url 'admin_home' %}">Inicio</a>
+            <a href="{% url 'logout' %}">Cerrar Sesión</a>
+            <a href="{% url 'nuevo_medicamento' %}">Ingresar Medicamentos</a>
+        </nav>
+    </header>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for medicamento in medicamentos %}
+            <tr>
+                <td>{{ medicamento.id }}</td>
+                <td>{{ medicamento.nombre }}</td>
+                <td>{{ medicamento.descripcion }}</td>
+                <td>{{ medicamento.stock }}</td>
+                <td>${{ medicamento.precio }}</td>
+                <td>
+                    <a href="{% url 'eliminar_medicamento' medicamento.id %}" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No hay medicamentos disponibles.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <footer>
+        <p>&copy; 2024 Farmacia</p>
+    </footer>
+
+    <!-- JavaScript dentro del HTML -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("Página cargada correctamente.");
+        });
+    </script>
+</body>
+</html>

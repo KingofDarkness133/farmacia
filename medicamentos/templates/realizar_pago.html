@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago Realizado</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .success-message {
+            margin-top: 20%;
+        }
+    </style>
+    <script>
+        // Redirigir automáticamente al index.html después de 5 segundos
+        setTimeout(function() {
+            window.location.href = "{% url 'index' %}";
+        }, 5000);
+    </script>
+</head>
+<body>
+    <div class="container text-center success-message">
+        <h1 class="text-success">¡Pago realizado con éxito!</h1>
+        <p>Gracias por tu compra. Serás redirigido al inicio en unos momentos...</p>
+        <p>Si no ocurre, haz clic <a href="{% url 'index' %}">aquí</a> para volver al inicio.</p>
+    </div>
+</body>
+</html>

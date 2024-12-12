@@ -1,0 +1,107 @@
+<!-- eliminar_medicamento.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Medicamento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        header nav a {
+            margin: 0 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .container {
+            width: 50%;
+            margin: 2rem auto;
+            background-color: white;
+            padding: 1rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .btn-danger {
+            background-color: #e74c3c;
+        }
+
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+
+        .btn-cancel {
+            background-color: #95a5a6;
+        }
+
+        .btn-cancel:hover {
+            background-color: #7f8c8d;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Eliminar Medicamento</h1>
+    <nav>
+        <a href="{% url 'admin_home' %}">Inicio</a>
+        <a href="{% url 'logout' %}">Cerrar Sesión</a>
+        <a href="{% url 'lista_medicamentos' %}">Lista de Medicamentos</a>
+    </nav>
+</header>
+
+<div class="container">
+    <h2>Selecciona el medicamento que deseas eliminar:</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <select name="medicamento_slug" required>
+            <option value="">Seleccione un medicamento</option>
+            {% for medicamento in medicamentos %}
+                <option value="{{ medicamento.slug }}">{{ medicamento.nombre }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        <a href="{% url 'lista_medicamentos' %}" class="btn btn-cancel">Cancelar</a>
+    </form>
+</div>
+
+<footer>
+    <p>&copy; 2024 Farmacia</p>
+</footer>
+
+</body>
+</html>
